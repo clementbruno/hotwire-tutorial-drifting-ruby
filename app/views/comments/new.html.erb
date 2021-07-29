@@ -1,0 +1,12 @@
+<%# The syntax used for reset-form in this file is really important. IN the video Dave uses an underscore but it does not work. "reset" and "form" should be separated by a dash %>
+<%= turbo_frame_tag "new_comment" do %>
+  <h2>New comment</h2>
+  <%= form_with model: [@ticket, @comment],
+    data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form|
+  %>
+    <div class="field">
+      <%= form.rich_text_area :content %>
+      <%= form.submit "Post", 'data-reset-form-target': 'button' %>
+    </div>
+  <% end %>
+<% end %>
